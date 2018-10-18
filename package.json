@@ -1,0 +1,42 @@
+{
+  "name": "cordova-plugin-stripe-terminal",
+  "version": "0.0.1",
+  "description": "Cordova Stripe Terminal Plugin",
+  "scripts": {
+    "docs": "jsdoc -R README.md -r www/* -d docs",
+    "test": "eslint ."
+  },
+  "cordova": {
+    "id": "cordova-plugin-stripe-terminal",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Filiosoft/cordova-plugin-stripe-terminal.git"
+  },
+  "keywords": [
+    "cordova",
+    "stripe",
+    "stripe-terminal",
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "main": "www/Terminal.js",
+  "author": "Filiosoft Team <opensource@filiosoft.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Filiosoft/cordova-plugin-stripe-terminal/issues"
+  },
+  "homepage": "https://github.com/Filiosoft/cordova-plugin-stripe-terminal#readme",
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jsdoc": "^3.5.5"
+  }
+}

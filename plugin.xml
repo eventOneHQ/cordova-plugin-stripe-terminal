@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-stripe-terminal" version="0.0.1">
+    <name>Stripe Terminal</name>
+    <description>Cordova Stripe Terminal Plugin</description>
+    <license>MIT</license>
+    <keywords>cordova,stripe,stripe-terminal</keywords>
+    <js-module src="www/terminal.js" name="terminal">
+        <clobbers target="terminal" />
+    </js-module>
+    <platform name="ios">
+
+    </platform>
+</plugin>
