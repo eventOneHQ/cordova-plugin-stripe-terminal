@@ -9,6 +9,11 @@
         <clobbers target="terminal" />
     </js-module>
     <platform name="ios">
-
+        <config-file target="config.xml" parent="/*">
+            <feature name="Terminal">
+            <param name="ios-package" value="Terminal" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/Terminal.swift" />
     </platform>
 </plugin>

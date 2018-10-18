@@ -1,6 +1,8 @@
 # cordova-plugin-stripe-terminal
 
-Cordova Plugin for [Stripe Terminal](https://stripe.com/terminal). WIP
+## WIP - [Help Wanted](https://github.com/Filiosoft/cordova-plugin-stripe-terminal/issues/1)
+
+Cordova Plugin for [Stripe Terminal](https://stripe.com/terminal).
 
 [![npm](https://img.shields.io/npm/l/cordova-plugin-stripe-terminal.svg)](https://www.npmjs.com/package/cordova-plugin-stripe-terminal/)
 [![npm](https://img.shields.io/npm/dt/cordova-plugin-stripe-terminal.svg)](https://www.npmjs.com/package/cordova-plugin-stripe-terminal)
