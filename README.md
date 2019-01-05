@@ -1,6 +1,6 @@
 # cordova-plugin-stripe-terminal
 
-## WIP - [Help Wanted](https://github.com/Filiosoft/cordova-plugin-stripe-terminal/issues/1)
+## WIP - [Help Wanted](https://github.com/eventOneHQ/cordova-plugin-stripe-terminal/issues/1)
 
 Cordova Plugin for [Stripe Terminal](https://stripe.com/terminal).
 
