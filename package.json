@@ -8,12 +8,13 @@
   },
   "cordova": {
     "id": "cordova-plugin-stripe-terminal",
-    "platforms": ["ios"]
+    "platforms": [
+      "ios"
+    ]
   },
   "repository": {
     "type": "git",
-    "url":
-      "git+https://github.com/eventOneHQ/cordova-plugin-stripe-terminal.git"
+    "url": "git+https://github.com/eventOneHQ/cordova-plugin-stripe-terminal.git"
   },
   "keywords": [
     "cordova",
@@ -22,14 +23,13 @@
     "ecosystem:cordova",
     "cordova-ios"
   ],
-  "main": "www/Terminal.js",
+  "main": "www/terminal.js",
   "author": "eventOne Labs <opensource@event1.io>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/eventOneHQ/cordova-plugin-stripe-terminal/issues"
   },
-  "homepage":
-    "https://github.com/eventOneHQ/cordova-plugin-stripe-terminal#readme",
+  "homepage": "https://github.com/eventOneHQ/cordova-plugin-stripe-terminal#readme",
   "devDependencies": {
     "eslint": "^5.7.0",
     "eslint-config-standard": "^12.0.0",

@@ -1,5 +1,7 @@
 var exec = require('cordova/exec')
-var noop = function () {}
+var noop = function (data) {
+  console.log(data)
+}
 
 /**
  * @namespace cordova.plugins
@@ -11,13 +13,16 @@ var noop = function () {}
 module.exports = {
   /**
    * Initialize Stripe Terminal
-   * @param key {string} Secret key
+   * @param tokenProvider {string} Token provider function
    * @param [success] {Function} Success callback
    * @param [error] {Function} Error callback
    */
-  init: function (key, success, error) {
+  initTerminal: function (url, success, error) {
     success = success || noop
     error = error || noop
-    exec(success, error, 'CordovaStripeTerminal', 'init', [key])
+
+    exec(success, error, 'CordovaTerminal', 'initTerminal', [
+      url
+    ])
   }
 }

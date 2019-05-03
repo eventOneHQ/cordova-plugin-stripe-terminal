@@ -5,15 +5,39 @@
     <description>Cordova Stripe Terminal Plugin</description>
     <license>MIT</license>
     <keywords>cordova,stripe,stripe-terminal</keywords>
+
     <js-module src="www/terminal.js" name="terminal">
-        <clobbers target="terminal" />
+        <clobbers target="cordova.plugins.terminal" />
     </js-module>
+
     <platform name="ios">
+        <framework src="StripeTerminal" type="podspec" spec="~> 1.0.0-rc1" />
         <config-file target="config.xml" parent="/*">
-            <feature name="Terminal">
-            <param name="ios-package" value="Terminal" />
+            <feature name="CordovaTerminal">
+                <param name="ios-package" value="CordovaTerminal" />
             </feature>
         </config-file>
-        <source-file src="src/ios/Terminal.swift" />
+        <source-file src="src/ios/CordovaTerminal.swift" />
+    </platform>
+
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="CordovaTerminal">
+                <param name="android-package" value="io.event1.cordova.stripe.CordovaTerminal"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/io/event1/cordova/stripe/CordovaTerminal.java" target-dir="src/io/event1/cordova/stripe" />
+        <source-file src="src/android/io/event1/cordova/stripe/TokenProvider.java" target-dir="src/io/event1/cordova/stripe" />
+
+        <framework src="com.jakewharton.timber:timber:4.7.1" />
+        <framework src="com.google.dagger:dagger:2.17" />
+        <framework src="com.squareup.okhttp3:okhttp:3.11.0" />
+        <framework src="com.google.guava:guava:26.0-android" />
+        <framework src="com.stripe:stripeterminal:0.5.1" />
     </platform>
 </plugin>
