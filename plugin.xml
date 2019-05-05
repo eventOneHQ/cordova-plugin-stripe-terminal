@@ -6,21 +6,33 @@
     <license>MIT</license>
     <keywords>cordova,stripe,stripe-terminal</keywords>
 
-    <js-module src="www/terminal.js" name="terminal">
-        <clobbers target="cordova.plugins.terminal" />
+    <js-module src="www/Terminal.js" name="StripeTerminal">
+        <clobbers target="StripeTerminal" />
     </js-module>
 
     <platform name="ios">
-        <framework src="StripeTerminal" type="podspec" spec="~> 1.0.0-rc1" />
+        <podspec>
+            <config>
+                <source url="https://github.com/cocoapods/specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="StripeTerminal" spec="1.0.0-rc1" />
+                <pod name="Alamofire" spec="4.7.0" />
+            </pods>
+        </podspec>
+        
         <config-file target="config.xml" parent="/*">
-            <feature name="CordovaTerminal">
-                <param name="ios-package" value="CordovaTerminal" />
+            <feature name="StripeTerminal">
+                <param name="ios-package" value="CDVStripeTerminal" />
             </feature>
         </config-file>
-        <source-file src="src/ios/CordovaTerminal.swift" />
+        <source-file src="src/ios/CDVStripeTerminal.swift" />
+        <source-file src="src/ios/TokenProvider.swift" />
+
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
 
-    <platform name="android">
+    <!-- <platform name="android">
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
         </config-file>
@@ -39,5 +51,5 @@
         <framework src="com.squareup.okhttp3:okhttp:3.11.0" />
         <framework src="com.google.guava:guava:26.0-android" />
         <framework src="com.stripe:stripeterminal:0.5.1" />
-    </platform>
+    </platform> -->
 </plugin>

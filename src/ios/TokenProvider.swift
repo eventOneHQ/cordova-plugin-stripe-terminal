@@ -18,10 +18,12 @@ class APIClient: ConnectionTokenProvider {
         Alamofire.request(apiUrl, method: .get)
             .responseJSON { responseJSON in
                 switch responseJSON.result {
-                case .success(let json):
+                case .success(let value):
                     let json = value as! [String: AnyObject]
-                    print(json["secret"])
-                    completion(json["secret"], nil)
+
+                    let secret = json["secret"] as! String
+                    print(secret)
+                    completion(secret, nil)
                 case .failure(let error):
                     print(error)
                     completion(nil, error)

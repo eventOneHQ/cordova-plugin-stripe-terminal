@@ -1,4 +1,6 @@
 var exec = require('cordova/exec')
+var channel = require('corodva/channel')
+
 var noop = function (data) {
   console.log(data)
 }
@@ -13,16 +15,36 @@ var noop = function (data) {
 module.exports = {
   /**
    * Initialize Stripe Terminal
-   * @param tokenProvider {string} Token provider function
+   * @param url {string} API URL to get the token
    * @param [success] {Function} Success callback
    * @param [error] {Function} Error callback
    */
-  initTerminal: function (url, success, error) {
+  setTokenProvider: function (url, success, error) {
     success = success || noop
     error = error || noop
 
-    exec(success, error, 'CordovaTerminal', 'initTerminal', [
-      url
-    ])
+    exec(success, error, 'StripeTerminal', 'setTokenProvider', [url])
+  },
+
+  getReaders: function (success, error) {
+    success = success || noop
+    error = error || noop
+
+    exec(success, error, 'StripeTerminal', 'getReaders', [])
+  },
+
+  discoverReaders: function (success, error) {
+    success = success || noop
+    error = error || noop
+
+    exec(
+      function () {
+        this.getReaders(success, error)
+      },
+      error,
+      'StripeTerminal',
+      'discoverReaders',
+      []
+    )
   }
 }
