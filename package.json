@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "description": "Cordova Stripe Terminal Plugin",
   "scripts": {
-    "docs": "jsdoc -R README.md -r www/* -d docs",
-    "test": "eslint ."
+    "docs": "jsdoc -R README.md -r src/js/* -d docs",
+    "test": "eslint .",
+    "build": "babel src/js -d www",
+    "build:watch": "nodemon -w ./src/js -e js -x npm run build"
   },
   "cordova": {
     "id": "cordova-plugin-stripe-terminal",
@@ -23,7 +25,7 @@
     "ecosystem:cordova",
     "cordova-ios"
   ],
-  "main": "www/terminal.js",
+  "main": "www/Terminal.js",
   "author": "eventOne Labs <opensource@event1.io>",
   "license": "MIT",
   "bugs": {
@@ -31,12 +33,18 @@
   },
   "homepage": "https://github.com/eventOneHQ/cordova-plugin-stripe-terminal#readme",
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "eslint": "^5.7.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "jsdoc": "^3.5.5"
-  }
+    "jsdoc": "^3.5.5",
+    "nodemon": "^1.19.0",
+    "babel-plugin-add-header-comment": "^1.0.3"
+  },
+  "dependencies": {}
 }

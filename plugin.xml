@@ -30,6 +30,27 @@
         <source-file src="src/ios/TokenProvider.swift" />
 
         <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+
+        <preference name="LOCATION_WHEN_IN_USAGE_DESCRIPTION" default="Location access is required in order to accept payments."/>
+        <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+            <string>$LOCATION_WHEN_IN_USAGE_DESCRIPTION</string>
+        </edit-config>
+
+        <preference name="BLUETOOTH_PERIPHERAL_USAGE_DESCRIPTION" default="Bluetooth access is required in order to connect to supported card readers."/>
+        <edit-config target="NSBluetoothPeripheralUsageDescription" file="*-Info.plist" mode="merge">
+            <string>$BLUETOOTH_PERIPHERAL_USAGE_DESCRIPTION</string>
+        </edit-config>
+
+        <preference name="MICROPHONE_USAGE_DESCRIPTION" default="Microphone access is required in order to connect to supported card readers."/>
+        <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
+            <string>$MICROPHONE_USAGE_DESCRIPTION</string>
+        </edit-config>
+
+        <edit-config target="UIBackgroundModes" file="*-Info.plist" mode="merge">
+            <array>
+                <string>bluetooth-central</string>
+            </array>
+        </edit-config>
     </platform>
 
     <!-- <platform name="android">
