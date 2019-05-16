@@ -4,9 +4,8 @@ import Foundation
 @objc(CDVStripeTerminal) class CDVStripeTerminal: CDVPlugin, DiscoveryDelegate, ReaderDisplayDelegate {
     private var readers: [Any] = []
     private var readerObjs: [Reader] = []
-    private var inputOptionsList = [Any]()
-    private var inputPrompts = [Any]()
-    
+    private var inputOptionsList: [String] = []
+    private var inputPrompts: [String] = []
     private var discoverCancleable: Cancelable?
     
     override init() {
@@ -120,8 +119,10 @@ import Foundation
     }
     func terminal(_ terminal: Terminal, didRequestReaderInput inputOptions: ReaderInputOptions = []) {
         let inputOptionsString = Terminal.stringFromReaderInputOptions(inputOptions)
+
+        print("inputOptionsString \(inputOptionsString)")
         
-        self.inputOptionsList.append(inputOptionsString)
+//        self.inputOptionsList.append(inputOptionsString)
     }
     
     
@@ -139,8 +140,10 @@ import Foundation
     }
     func terminal(_ terminal: Terminal, didRequestReaderDisplayMessage inputPrompt: ReaderDisplayMessage) {
         let inputPromptString = Terminal.stringFromReaderDisplayMessage(inputPrompt)
+
+        print("inputPromptString \(inputPromptString)")
         
-        self.inputPrompts.append(inputPromptString)
+//        self.inputPrompts.append(inputPromptString)
     }
     
     @objc(connectReader:)
@@ -191,51 +194,63 @@ import Foundation
         )
         
         let clientSecret = command.arguments[0] as? String ?? ""
+        print(clientSecret)
         
         // get the payment intent
         let paymentIntent = Terminal.shared.retrievePaymentIntent(clientSecret: clientSecret) { paymentIntent, error in
-            
-            // collect a payment method
-            let cancelable = Terminal.shared.collectPaymentMethod(paymentIntent!, delegate: self) { paymentIntent, error in
-                if let paymentIntent = paymentIntent {
-                    
-                    // process the payment
-                    Terminal.shared.processPayment(paymentIntent) { paymentIntent, error in
-                        if let paymentIntent = paymentIntent {
-                            var pluginResult = CDVPluginResult(
-                                status: CDVCommandStatus_ERROR,
-                                messageAs: paymentIntent.stripeId
-                            )
-                            self.commandDelegate!.send(
-                                pluginResult,
-                                callbackId: command.callbackId
-                            )
-                        }
-                        else if let error = error {
-                            pluginResult = CDVPluginResult(
-                                status: CDVCommandStatus_ERROR,
-                                messageAs: error.localizedDescription
-                            )
-                            self.commandDelegate!.send(
-                                pluginResult,
-                                callbackId: command.callbackId
-                            )
+            if let paymentIntent = paymentIntent {
+                print("retrievePaymentIntent")
+                // collect a payment method
+                let cancelable = Terminal.shared.collectPaymentMethod(paymentIntent, delegate: self) { paymentIntent, error in
+                    if let paymentIntent = paymentIntent {
+                        print("collectPaymentMethod \(paymentIntent)")
+                        // process the payment
+                        Terminal.shared.processPayment(paymentIntent) { paymentIntent, error in
+                            if let paymentIntent = paymentIntent {
+                                print("processPayment")
+                                let pluginResult = CDVPluginResult(
+                                    status: CDVCommandStatus_ERROR,
+                                    messageAs: paymentIntent.stripeId
+                                )
+                                self.commandDelegate!.send(
+                                    pluginResult,
+                                    callbackId: command.callbackId
+                                )
+                            }
+                            else if let error = error {
+                                pluginResult = CDVPluginResult(
+                                    status: CDVCommandStatus_ERROR,
+                                    messageAs: error.localizedDescription
+                                )
+                                self.commandDelegate!.send(
+                                    pluginResult,
+                                    callbackId: command.callbackId
+                                )
+                            }
                         }
                     }
-                }
-                else if let error = error {
-                    pluginResult = CDVPluginResult(
-                        status: CDVCommandStatus_ERROR,
-                        messageAs: error.localizedDescription
-                    )
-                    self.commandDelegate!.send(
-                        pluginResult,
-                        callbackId: command.callbackId
-                    )
+                    else if let error = error {
+                        pluginResult = CDVPluginResult(
+                            status: CDVCommandStatus_ERROR,
+                            messageAs: error.localizedDescription
+                        )
+                        self.commandDelegate!.send(
+                            pluginResult,
+                            callbackId: command.callbackId
+                        )
+                    }
                 }
             }
+            else if let error = error {
+                pluginResult = CDVPluginResult(
+                    status: CDVCommandStatus_ERROR,
+                    messageAs: error.localizedDescription
+                )
+                self.commandDelegate!.send(
+                    pluginResult,
+                    callbackId: command.callbackId
+                )
+            }
         }
-        
-        
     }
 }
