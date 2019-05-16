@@ -44,7 +44,7 @@ import Foundation
         let config = DiscoveryConfiguration(
             deviceType: .chipper2X,
             discoveryMethod: .bluetoothScan,
-            simulated: true
+            simulated: false
         )
         
         
@@ -209,7 +209,7 @@ import Foundation
                             if let paymentIntent = paymentIntent {
                                 print("processPayment")
                                 let pluginResult = CDVPluginResult(
-                                    status: CDVCommandStatus_ERROR,
+                                    status: CDVCommandStatus_OK,
                                     messageAs: paymentIntent.stripeId
                                 )
                                 self.commandDelegate!.send(
