@@ -113,10 +113,8 @@ function () {
 
             self.timers['readers'] = setInterval(function () {
               exec(function (readers) {
-                if (readers) {
-                  self.emit('readers', readers);
-                }
-              }, self.reject, PLUGIN_NAME, 'getReaders', []);
+                self.emit('readers', readers);
+              }, reject, PLUGIN_NAME, 'getReaders', []);
             }, 1000);
             resolve();
           }, 100);
@@ -177,6 +175,21 @@ function () {
         _this3.log('collectPayment');
 
         exec(resolve, reject, PLUGIN_NAME, 'collectPayment', [clientSecret]);
+      });
+    }
+    /**
+     * Get the current connection status.
+     */
+
+  }, {
+    key: "connectionStatus",
+    value: function connectionStatus() {
+      var _this4 = this;
+
+      return new Promise(function (resolve, reject) {
+        _this4.log('connectionStatus');
+
+        exec(resolve, reject, PLUGIN_NAME, 'connectionStatus', []);
       });
     }
     /**

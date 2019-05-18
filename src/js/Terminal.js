@@ -82,16 +82,19 @@ class Terminal {
             self.timers['readers'] = setInterval(() => {
               exec(
                 readers => {
-                  if (readers) {
-                    self.emit('readers', readers)
-                  }
+                  self.emit('readers', readers)
                 },
-                self.reject,
+                reject,
                 PLUGIN_NAME,
                 'getReaders',
                 []
               )
             }, 1000)
+
+            // clear the interval after 10 seconds
+            setTimeout(() => {
+              clearInterval(self.timers['readers'])
+            }, 10000)
 
             resolve()
           }, 100)
@@ -156,6 +159,16 @@ class Terminal {
 
       this.log('collectPayment')
       exec(resolve, reject, PLUGIN_NAME, 'collectPayment', [clientSecret])
+    })
+  }
+
+  /**
+   * Get the current connection status.
+   */
+  connectionStatus () {
+    return new Promise((resolve, reject) => {
+      this.log('connectionStatus')
+      exec(resolve, reject, PLUGIN_NAME, 'connectionStatus', [])
     })
   }
 

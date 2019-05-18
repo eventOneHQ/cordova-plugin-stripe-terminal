@@ -20,6 +20,9 @@
                 <pod name="Alamofire" spec="4.7.0" />
             </pods>
         </podspec>
+
+        <framework src="StripeTerminal" type="podspec" spec="1.0.0-rc1" />
+        <framework src="Alamofire" type="podspec" spec="4.7.0" />
         
         <config-file target="config.xml" parent="/*">
             <feature name="StripeTerminal">

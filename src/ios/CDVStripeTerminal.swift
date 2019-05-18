@@ -119,10 +119,10 @@ import Foundation
     }
     func terminal(_ terminal: Terminal, didRequestReaderInput inputOptions: ReaderInputOptions = []) {
         let inputOptionsString = Terminal.stringFromReaderInputOptions(inputOptions)
-
+        
         print("inputOptionsString \(inputOptionsString)")
         
-//        self.inputOptionsList.append(inputOptionsString)
+        //        self.inputOptionsList.append(inputOptionsString)
     }
     
     
@@ -140,10 +140,10 @@ import Foundation
     }
     func terminal(_ terminal: Terminal, didRequestReaderDisplayMessage inputPrompt: ReaderDisplayMessage) {
         let inputPromptString = Terminal.stringFromReaderDisplayMessage(inputPrompt)
-
+        
         print("inputPromptString \(inputPromptString)")
         
-//        self.inputPrompts.append(inputPromptString)
+        //        self.inputPrompts.append(inputPromptString)
     }
     
     @objc(connectReader:)
@@ -197,11 +197,11 @@ import Foundation
         print(clientSecret)
         
         // get the payment intent
-        let paymentIntent = Terminal.shared.retrievePaymentIntent(clientSecret: clientSecret) { paymentIntent, error in
+        Terminal.shared.retrievePaymentIntent(clientSecret: clientSecret, completion: { paymentIntent, error in
             if let paymentIntent = paymentIntent {
-                print("retrievePaymentIntent")
+                print("retrievePaymentIntent \(paymentIntent)")
                 // collect a payment method
-                let cancelable = Terminal.shared.collectPaymentMethod(paymentIntent, delegate: self) { paymentIntent, error in
+                let cancelable = Terminal.shared.collectPaymentMethod(paymentIntent, delegate: self, completion: { paymentIntent, error in
                     if let paymentIntent = paymentIntent {
                         print("collectPaymentMethod \(paymentIntent)")
                         // process the payment
@@ -239,7 +239,7 @@ import Foundation
                             callbackId: command.callbackId
                         )
                     }
-                }
+                })
             }
             else if let error = error {
                 pluginResult = CDVPluginResult(
@@ -251,6 +251,21 @@ import Foundation
                     callbackId: command.callbackId
                 )
             }
-        }
+        })
+    }
+    
+    @objc(connectionStatus:)
+    func connectionStatus(command: CDVInvokedUrlCommand) {
+        let connectionStatus = Terminal.stringFromConnectionStatus(Terminal.shared.connectionStatus)
+        
+        let pluginResult = CDVPluginResult(
+            status: CDVCommandStatus_OK,
+            messageAs: connectionStatus
+        )
+        
+        self.commandDelegate!.send(
+            pluginResult,
+            callbackId: command.callbackId
+        )
     }
 }
