@@ -1,10 +1,13 @@
-# cordova-plugin-stripe-terminal!
+# This project has been abandoned in favor of `capacitor-stripe-terminal`
 
-## WIP - [Help Wanted](https://github.com/eventOneHQ/cordova-plugin-stripe-terminal/issues/1)
+This project has been abandoned in favor of creating a [Capacitor](https://capacitor.ionicframework.com) plugin. 
 
-Cordova Plugin for [Stripe Terminal](https://stripe.com/terminal).
+https://github.com/eventOneHQ/capacitor-stripe-terminal
 
-[![npm](https://img.shields.io/npm/l/cordova-plugin-stripe-terminal.svg)](https://www.npmjs.com/package/cordova-plugin-stripe-terminal/)
-[![npm](https://img.shields.io/npm/dt/cordova-plugin-stripe-terminal.svg)](https://www.npmjs.com/package/cordova-plugin-stripe-terminal)
-[![npm](https://img.shields.io/npm/dm/cordova-plugin-stripe-terminal.svg)](https://www.npmjs.com/package/cordova-plugin-stripe-terminal)
-[![Slack](https://slack.event1.io/badge.svg)](https://slack.event1.io/)
+## What is Capacitor??
+
+If you haven't heard of it, Capacitor is Ionic's alternative to Cordova. The plugin architecture and documentation is far better than Cordova's which is what prompted me to switch. Capacitor takes what Ionic learned from Cordova and improves upon it. I have found it far easier to work with than Cordova was. They have also created [great documentation](https://capacitor.ionicframework.com/docs/cordova) that makes migrating to Capacitor really easy. 
+
+## Still want a Cordova plugin?
+If you would like to take over this project and continue development on it, please email us:
+opensource@event1.io
